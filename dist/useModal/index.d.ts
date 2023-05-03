@@ -1,9 +1,9 @@
-declare const useModal: () => {
+declare const useModal: ({ disappearDelayMsTime, }: {
+    disappearDelayMsTime?: number | undefined;
+}) => {
     isModalOpen: boolean;
     animation: "appear" | "disappear";
-    delayMsTime: number;
     openModal: () => void;
     closeModal: () => void;
-    changeDelayMsTime: (time: number) => void;
 };
 export default useModal;

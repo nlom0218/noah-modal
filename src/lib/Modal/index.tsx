@@ -1,7 +1,3 @@
-import { PropsWithChildren, useEffect } from 'react';
-
-import useModal from '../useModal';
-
 import * as S from './style';
 import { ModalProps } from './type';
 
@@ -10,19 +6,15 @@ function Modal({
   delayMsTime = 0,
   isAbleBackdropClick = true,
   children,
-}: PropsWithChildren<ModalProps>) {
-  const { animation, closeModal, changeDelayMsTime } = useModal();
-
+  animation,
+  closeModal,
+}: ModalProps) {
   const handleCloseModal = () => closeModal();
 
   const handleClickBackdrop = () => {
     if (!isAbleBackdropClick) return;
     handleCloseModal();
   };
-
-  useEffect(() => {
-    changeDelayMsTime(delayMsTime);
-  }, []);
 
   return (
     <S.ModalLayout animation={animation} delayMsTime={delayMsTime}>

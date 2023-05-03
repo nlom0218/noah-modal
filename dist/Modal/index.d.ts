@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+/// <reference types="react" />
 import { ModalProps } from './type';
-declare function Modal({ title, delayMsTime, isAbleBackdropClick, children, }: PropsWithChildren<ModalProps>): JSX.Element;
+declare function Modal({ title, delayMsTime, isAbleBackdropClick, children, animation, closeModal, }: ModalProps): JSX.Element;
 export default Modal;
