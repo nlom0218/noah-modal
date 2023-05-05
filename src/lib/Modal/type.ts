@@ -3,11 +3,12 @@ import { AnimationTypes } from '../types';
 
 export type ModalProps = {
   title: string;
-  delayMsTime?: number;
-  isAbleBackdropClick?: boolean;
+  name: string;
+  delayMsTime: number;
+  isAbleBackdropClick: boolean;
   children: ReactNode;
   animation: AnimationTypes;
-  closeModal: () => void;
+  closeModal: (name: string) => void;
 };
 
 export type AnimationType = {

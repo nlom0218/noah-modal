@@ -12,8 +12,8 @@ var __assign = (this && this.__assign) || function () {
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import * as S from './style';
 function Modal(_a) {
-    var title = _a.title, _b = _a.delayMsTime, delayMsTime = _b === void 0 ? 0 : _b, _c = _a.isAbleBackdropClick, isAbleBackdropClick = _c === void 0 ? true : _c, children = _a.children, animation = _a.animation, closeModal = _a.closeModal;
-    var handleCloseModal = function () { return closeModal(); };
+    var title = _a.title, name = _a.name, delayMsTime = _a.delayMsTime, isAbleBackdropClick = _a.isAbleBackdropClick, children = _a.children, animation = _a.animation, closeModal = _a.closeModal;
+    var handleCloseModal = function () { return closeModal(name); };
     var handleClickBackdrop = function () {
         if (!isAbleBackdropClick)
             return;

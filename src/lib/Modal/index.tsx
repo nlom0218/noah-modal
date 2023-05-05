@@ -3,13 +3,14 @@ import { ModalProps } from './type';
 
 function Modal({
   title,
-  delayMsTime = 0,
-  isAbleBackdropClick = true,
+  name,
+  delayMsTime,
+  isAbleBackdropClick,
   children,
   animation,
   closeModal,
 }: ModalProps) {
-  const handleCloseModal = () => closeModal();
+  const handleCloseModal = () => closeModal(name);
 
   const handleClickBackdrop = () => {
     if (!isAbleBackdropClick) return;

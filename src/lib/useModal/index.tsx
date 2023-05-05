@@ -1,42 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 
-import ANIMATION from '../constants';
-import { AnimationTypes } from '../types';
+import ModalContext from '../ModalProvider/ModalContext';
 
-const useModal = ({
-  disappearDelayMsTime = 0,
-}: {
-  disappearDelayMsTime?: number;
-}) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [animation, setAnimation] = useState<AnimationTypes>(ANIMATION.appear);
-  const [delayMsTime, setDelayMsTime] = useState(0);
+const useModal = () => {
+  const { openModal, closeModal, currentModal } = useContext(ModalContext);
 
-  const openModal = () => setIsModalOpen(true);
+  const _openModal = (name: string) => openModal(name);
 
-  const closeModal = () => setIsModalOpen(false);
-
-  const changeAnimationMode = (mode: AnimationTypes) => {
-    setAnimation(mode);
-  };
-
-  const closeModalWithTime = () => {
-    changeAnimationMode(ANIMATION.disappear);
-    setTimeout(() => {
-      closeModal();
-      changeAnimationMode(ANIMATION.appear);
-    }, delayMsTime);
-  };
-
-  useEffect(() => {
-    if (disappearDelayMsTime) setDelayMsTime(disappearDelayMsTime);
-  }, []);
+  const _closeModal = (name: string) => closeModal(name);
 
   return {
-    isModalOpen,
-    animation,
-    openModal,
-    closeModal: closeModalWithTime,
+    openModal: _openModal,
+    closeModal: _closeModal,
+    Modal: currentModal,
   };
 };
 
