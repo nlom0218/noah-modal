@@ -13,32 +13,42 @@ function ModalProvider({
 }: PropsWithChildren<{ modals: ModalType[] }>) {
   const [currentModal, setCurrentModal] =
     useState<ModalComponentReturnType | null>(null);
-  const [animation, setAnimation] = useState<AnimationTypes>(ANIMATION.appear);
-
-  const changeAnimationMode = (mode: AnimationTypes) => {
-    setAnimation(mode);
-  };
 
   const closeModal = (name: string) => {
-    const modal = modals.find((_modal) => _modal.name === name);
-    if (!modal) throw Error(`${name}에 해당하는 모달이 없습니다.`);
+    const modal = findModal(name);
+    if (!modal) return generateModalNoExistError(name);
 
     const { delayMsTime } = modal;
 
-    changeAnimationMode(ANIMATION.disappear);
+    setCurrentModal(makeModalComponent(modal, name, ANIMATION.disappear));
+
     setTimeout(() => {
       setCurrentModal(null);
-      changeAnimationMode(ANIMATION.appear);
     }, delayMsTime);
   };
 
   const openModal = (name: string) => {
-    const modal = modals.find((_modal) => _modal.name === name);
-    if (!modal) throw Error(`${name}에 해당하는 모달이 없습니다.`);
+    const modal = findModal(name);
+    if (!modal) return generateModalNoExistError(name);
 
+    setCurrentModal(makeModalComponent(modal, name, ANIMATION.appear));
+  };
+
+  const findModal = (name: string) =>
+    modals.find((_modal) => _modal.name === name);
+
+  const generateModalNoExistError = (name: string) => {
+    throw Error(`${name}에 해당하는 모달이 없습니다.`);
+  };
+
+  const makeModalComponent = (
+    modal: ModalType,
+    name: string,
+    animation: AnimationTypes
+  ) => {
     const { title, isAbleBackdropClick, delayMsTime, component } = modal;
 
-    const newModal = () => {
+    return () => {
       return () => (
         <Modal
           title={title}
@@ -51,8 +61,6 @@ function ModalProvider({
         />
       );
     };
-
-    setCurrentModal(newModal);
   };
 
   const initValue = {
