@@ -62,4 +62,5 @@ export const Title = styled.h3`
 export const CloseButton = styled.button`
   font-size: 18px;
   cursor: pointer;
+  border: none;
 `;

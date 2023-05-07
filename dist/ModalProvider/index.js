@@ -17,30 +17,33 @@ import Modal from '../Modal';
 function ModalProvider(_a) {
     var children = _a.children, modals = _a.modals;
     var _b = useState(null), currentModal = _b[0], setCurrentModal = _b[1];
-    var _c = useState(ANIMATION.appear), animation = _c[0], setAnimation = _c[1];
-    var changeAnimationMode = function (mode) {
-        setAnimation(mode);
-    };
     var closeModal = function (name) {
-        var modal = modals.find(function (_modal) { return _modal.name === name; });
+        var modal = findModal(name);
         if (!modal)
-            throw Error("".concat(name, "\uC5D0 \uD574\uB2F9\uD558\uB294 \uBAA8\uB2EC\uC774 \uC5C6\uC2B5\uB2C8\uB2E4."));
+            return generateModalNoExistError(name);
         var delayMsTime = modal.delayMsTime;
-        changeAnimationMode(ANIMATION.disappear);
+        setCurrentModal(makeModalComponent(modal, name, ANIMATION.disappear));
         setTimeout(function () {
             setCurrentModal(null);
-            changeAnimationMode(ANIMATION.appear);
         }, delayMsTime);
     };
     var openModal = function (name) {
-        var modal = modals.find(function (_modal) { return _modal.name === name; });
+        var modal = findModal(name);
         if (!modal)
-            throw Error("".concat(name, "\uC5D0 \uD574\uB2F9\uD558\uB294 \uBAA8\uB2EC\uC774 \uC5C6\uC2B5\uB2C8\uB2E4."));
+            return generateModalNoExistError(name);
+        setCurrentModal(makeModalComponent(modal, name, ANIMATION.appear));
+    };
+    var findModal = function (name) {
+        return modals.find(function (_modal) { return _modal.name === name; });
+    };
+    var generateModalNoExistError = function (name) {
+        throw Error("".concat(name, "\uC5D0 \uD574\uB2F9\uD558\uB294 \uBAA8\uB2EC\uC774 \uC5C6\uC2B5\uB2C8\uB2E4."));
+    };
+    var makeModalComponent = function (modal, name, animation) {
         var title = modal.title, isAbleBackdropClick = modal.isAbleBackdropClick, delayMsTime = modal.delayMsTime, component = modal.component;
-        var newModal = function () {
+        return function () {
             return function () { return (_jsx(Modal, { title: title, name: name, isAbleBackdropClick: isAbleBackdropClick || true, delayMsTime: delayMsTime || 0, animation: animation, closeModal: closeModal, children: component })); };
         };
-        setCurrentModal(newModal);
     };
     var initValue = {
         modals: modals,

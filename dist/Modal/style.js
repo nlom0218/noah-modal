@@ -18,5 +18,5 @@ export var ModalContents = styled.div(templateObject_3 || (templateObject_3 = __
 }, function (props) { return "".concat(props.delayMsTime / 1000, "s"); });
 export var TopSheet = styled.div(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  padding: 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n"], ["\n  padding: 20px;\n  display: flex;\n  justify-content: space-between;\n  align-items: center;\n"])));
 export var Title = styled.h3(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  font-size: 18px;\n  font-weight: 500;\n"], ["\n  font-size: 18px;\n  font-weight: 500;\n"])));
-export var CloseButton = styled.button(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  font-size: 18px;\n  cursor: pointer;\n"], ["\n  font-size: 18px;\n  cursor: pointer;\n"])));
+export var CloseButton = styled.button(templateObject_6 || (templateObject_6 = __makeTemplateObject(["\n  font-size: 18px;\n  cursor: pointer;\n  border: none;\n"], ["\n  font-size: 18px;\n  cursor: pointer;\n  border: none;\n"])));
 var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5, templateObject_6;

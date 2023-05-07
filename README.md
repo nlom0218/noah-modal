@@ -1,46 +1,167 @@
-# Getting Started with Create React App
+# noah-modal
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# 🌳 모달 라이브러리 만들기
 
-## Available Scripts
+`noah-modal` 라이브러리는 우아한테크코스 5기의 레벨2 미션 요구사항 중 하나로 기존 미션에서 사용하던 모달을 분리하여 npm으로 배포하고, 그 라이브러리를 직접 import해서 사용하는 것이 목표입니다.
 
-In the project directory, you can run:
+# 🗒️ 목차
 
-### `npm start`
+# 🚀 설치
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`npm` 또는 `yarn`을 사용하여 설치할 수 있습니다.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+```
+$ npm install noah-modal
+$ yarn add noah-modal
+```
 
-### `npm test`
+# 📚 사용법
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+`noah-modal`은 `ModalProvider`와 `useModal`를 사용하여 모달을 등록하고 모달을 열고 닫을 수 있습니다.
 
-### `npm run build`
+## 1️⃣ ModalProvider로 모달 등록하기
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+다음과 같이 `src/index.tsx`에 `ModalProvider`를 등록하세요.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```tsx
+// NoahModal.tsx
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+const NoahModal = () => {
+  return <div>노아 모달입니다.</div>;
+};
 
-### `npm run eject`
+export default NoahModal;
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```tsx
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { ModalProvider } from 'noah-modal'; // noah-modal 불러오기
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+import App from './App';
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
+  <React.StrictMode>
+    <ModalProvider
+      modals={[
+        {
+          title: 'noah modal',
+          component: <NoahModal />,
+          name: 'myModal',
+          delayMsTime: 500,
+        },
+      ]}
+    >
+      <App />
+    </ModalProvider>
+  </React.StrictMode>
+);
+```
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+`ModalProvider`는 `modal`을 매개변수로 받습니다. `modal`은 배열이며 앱에 등록하고자 하는 모달을 요소로 가집니다. 각 요소는 다음과 같은 속성을 가집니다.
 
-## Learn More
+|         key         | value type  | 필수인가요? | 기본값 |                                            설명                                             |
+| :-----------------: | :---------: | :---------: | :----: | :-----------------------------------------------------------------------------------------: |
+|        title        |   string    |     yes     |   -    |                                     모달의 제목입니다.                                      |
+|      component      | JSX.Element |     yes     |   -    |                                    모달 내 컨텐츠입니다.                                    |
+|        name         |   string    |     yes     |   -    |                                    모달 내 컨텐츠입니다.                                    |
+| isAbleBackdropClick |   boolean   |     no      |  true  |          모달 밖 배경을 클릭했을 때, 모달을 닫을지 닫지 않을지에 대한 여부입니다.           |
+|     delayMsTime     |   number    |     no      |   0    | 모달이 열고 닫을 때 걸리는 시간(ms)입니다. 해당 값을 설정하면 애니메이션 효과가 나타납니다. |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 2️⃣ useModal의 Modal로 모달 위치 정하기
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+보통 하나의 앱에서 하나의 모달이 존재합니다. 때문에 `ModalProvider`보단 하위 컴포넌트에 그리고 다른 컴포넌트들 보단 상위 컴포넌트에 `Modal`의 위치를 정하는 것을 권장합니다.
+
+다음은 전역적으로 필요한 것들을 설정하는 곳인 `App.tsx`에 `Modal`의 위치를 정한 예시입니다.
+
+```tsx
+import { useModal } from 'noah-modal'; // noah-modal 불러오기
+import { Outlet } from 'react-router-dom';
+import GlobalStyle, { GlobalLayout } from 'styles/globalStyle';
+
+function App() {
+  const { Modal } = useModal(); // useModal 훅을 통해 랜더링을 할 Modal 가져오기
+
+  return (
+    <>
+      <GlobalStyle />
+      <GlobalLayout>
+        <Outlet />
+        {Modal && <Modal />}
+      </GlobalLayout>
+    </>
+  );
+}
+
+export default App;
+```
+
+## 3️⃣ useModal의 openModal로 모달 열기
+
+`openModal` 함수를 통해 모달을 열 수 있습니다. 매개변수로는 앞서 등록한 모달의 `name`을 전달합니다.
+
+```tsx
+import { useModal } from 'noah-modal';
+
+function Home() {
+  const { openModal } = useModal();
+
+  const handleClickButton = () => {
+    openModal('noahModal'); // 모달 열기
+  };
+  return (
+    <div>
+      <button onClick={handleClickButton}>노아 모달 열기</button>
+    </div>
+  );
+}
+
+export default Home;
+```
+
+## 4️⃣ useModal의 closeModal로 모달 닫기
+
+`closeModal` 함수를 통해 모달을 닫을 수 있습니다. `openModal` 과 마찬가지로 매개변수로 `name`을 전달합니다.
+
+```tsx
+// NoahModal.tsx
+import { useModal } from 'noah-modal';
+
+function NoahModal() {
+  const { closeModal } = useModal();
+
+  return (
+    <div>
+      <div>노아 모달입니다.</div>
+      <button onClick={() => closeModal('noahModal')}>모달 닫기</button>
+    </div>
+  );
+}
+
+export default NoahModal;
+```
+
+# 🎥 위의 예시 보기
+
+다음은 `노아 모달`이 열고 닫는 모습을 나타낸 영상입니다.
+
+![모달 시연 영상](https://cdn.discordapp.com/attachments/1078222159966638143/1104693662635528232/--2023-05-07--5.54.14.gif)
+
+# 👨‍💻 만든이
+
+<table>
+  <tr>
+    <td align="center" width="120px">
+      <a href="https://github.com/shackstack" target="_blank">
+        <img src="https://avatars.githubusercontent.com/u/57981252?v=4" alt="노아(김홍동) 프로필" />
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <a href="https://github.com/nlom0218" target="_blank">
+        노아(김홍동)
+      </a>
+    </td>
+  </tr>
+</table>
