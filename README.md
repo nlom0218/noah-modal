@@ -4,7 +4,18 @@
 
 `noah-modal` 라이브러리는 우아한테크코스 5기의 레벨2 미션 요구사항 중 하나로 기존 미션에서 사용하던 모달을 분리하여 npm으로 배포하고, 그 라이브러리를 직접 import해서 사용하는 것이 목표입니다.
 
+<br/>
+<br/>
+
 # 🗒️ 목차
+
+[🚀 설치](#🚀-설치)  
+[📚 사용법](#📚-사용법)  
+[🎥 위의 예시 보기](#🎥-위의-예시-보기)  
+[👨‍💻 만든이](#👨‍💻-만든이)
+
+<br/>
+<br/>
 
 # 🚀 설치
 
@@ -15,11 +26,17 @@ $ npm install noah-modal
 $ yarn add noah-modal
 ```
 
+<br/>
+<br/>
+
 # 📚 사용법
 
 `noah-modal`은 `ModalProvider`와 `useModal`를 사용하여 모달을 등록하고 모달을 열고 닫을 수 있습니다.
 
-## 1️⃣ ModalProvider로 모달 등록하기
+<br/>
+<br/>
+
+## 1️. ModalProvider로 모달 등록하기
 
 다음과 같이 `src/index.tsx`에 `ModalProvider`를 등록하세요.
 
@@ -68,7 +85,10 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 | isAbleBackdropClick |   boolean   |     no      |  true  |          모달 밖 배경을 클릭했을 때, 모달을 닫을지 닫지 않을지에 대한 여부입니다.           |
 |     delayMsTime     |   number    |     no      |   0    | 모달이 열고 닫을 때 걸리는 시간(ms)입니다. 해당 값을 설정하면 애니메이션 효과가 나타납니다. |
 
-## 2️⃣ useModal의 Modal로 모달 위치 정하기
+<br/>
+<br/>
+
+## 2. useModal의 Modal로 모달 위치 정하기
 
 보통 하나의 앱에서 하나의 모달이 존재합니다. 때문에 `ModalProvider`보단 하위 컴포넌트에 그리고 다른 컴포넌트들 보단 상위 컴포넌트에 `Modal`의 위치를 정하는 것을 권장합니다.
 
@@ -96,7 +116,10 @@ function App() {
 export default App;
 ```
 
-## 3️⃣ useModal의 openModal로 모달 열기
+<br/>
+<br/>
+
+## 3️. useModal의 openModal로 모달 열기
 
 `openModal` 함수를 통해 모달을 열 수 있습니다. 매개변수로는 앞서 등록한 모달의 `name`을 전달합니다.
 
@@ -119,7 +142,10 @@ function Home() {
 export default Home;
 ```
 
-## 4️⃣ useModal의 closeModal로 모달 닫기
+<br/>
+<br/>
+
+## 4️. useModal의 closeModal로 모달 닫기
 
 `closeModal` 함수를 통해 모달을 닫을 수 있습니다. `openModal` 과 마찬가지로 매개변수로 `name`을 전달합니다.
 
@@ -141,11 +167,17 @@ function NoahModal() {
 export default NoahModal;
 ```
 
+<br/>
+<br/>
+
 # 🎥 위의 예시 보기
 
 다음은 `노아 모달`이 열고 닫는 모습을 나타낸 영상입니다.
 
 ![모달 시연 영상](https://cdn.discordapp.com/attachments/1078222159966638143/1104693662635528232/--2023-05-07--5.54.14.gif)
+
+<br/>
+<br/>
 
 # 👨‍💻 만든이
 
