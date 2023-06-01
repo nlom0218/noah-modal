@@ -77,13 +77,14 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
 
 `ModalProvider`는 `modal`을 매개변수로 받습니다. `modal`은 배열이며 앱에 등록하고자 하는 모달을 요소로 가집니다. 각 요소는 다음과 같은 속성을 가집니다.
 
-|         key         | value type  | 필수인가요? | 기본값 |                                            설명                                             |
-| :-----------------: | :---------: | :---------: | :----: | :-----------------------------------------------------------------------------------------: |
-|        title        |   string    |     yes     |   -    |                                     모달의 제목입니다.                                      |
-|      component      | JSX.Element |     yes     |   -    |                                    모달 내 컨텐츠입니다.                                    |
-|        name         |   string    |     yes     |   -    |              모달 이름입니다. 해당 값은 모달을 열고 닫을 때 사용되는 값입니다.              |
-| isAbleBackdropClick |   boolean   |     no      |  true  |          모달 밖 배경을 클릭했을 때, 모달을 닫을지 닫지 않을지에 대한 여부입니다.           |
-|     delayMsTime     |   number    |     no      |   0    | 모달이 열고 닫을 때 걸리는 시간(ms)입니다. 해당 값을 설정하면 애니메이션 효과가 나타납니다. |
+|         key         |      value type      | 필수인가요? |  기본값  |                                            설명                                             |
+| :-----------------: | :------------------: | :---------: | :------: | :-----------------------------------------------------------------------------------------: |
+|        title        |        string        |     yes     |    -     |                                     모달의 제목입니다.                                      |
+|      component      |     JSX.Element      |     yes     |    -     |                                    모달 내 컨텐츠입니다.                                    |
+|        name         |        string        |     yes     |    -     |              모달 이름입니다. 해당 값은 모달을 열고 닫을 때 사용되는 값입니다.              |
+| isAbleBackdropClick |       boolean        |     no      |   true   |          모달 밖 배경을 클릭했을 때, 모달을 닫을지 닫지 않을지에 대한 여부입니다.           |
+|     delayMsTime     |        number        |     no      |    0     | 모달이 열고 닫을 때 걸리는 시간(ms)입니다. 해당 값을 설정하면 애니메이션 효과가 나타납니다. |
+|      position       | "middle" or "bottom" |     no      | "bottom" |                                   모달의 위치를 정합니다.                                   |
 
 <br/>
 <br/>

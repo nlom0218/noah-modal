@@ -33,6 +33,17 @@ export const ModalContentsAppear = keyframes`
   }
 `;
 
+export const MiddleModalContentsAppear = keyframes`
+  0% {
+    opacity: 0;
+    transform: scale(0.8)
+  }
+  to {
+    opacity: 1;
+    transform: scale(1)
+  }
+`;
+
 export const ModalContentsDisAppear = keyframes`
   0% {
     opacity: 1;
@@ -41,5 +52,16 @@ export const ModalContentsDisAppear = keyframes`
   to {
     opacity: 0;
     transform: translate3d(0, 100%, 0);
+  }
+`;
+
+export const MiddleModalContentsDisAppear = keyframes`
+  0% {
+    opacity: 1;
+    transform: scale(1)
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.8)
   }
 `;

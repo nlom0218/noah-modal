@@ -7,5 +7,6 @@ export type ModalType = {
     name: string;
     isAbleBackdropClick?: boolean;
     delayMsTime?: number;
+    position?: 'bottom' | 'middle';
 };
 export type ModalComponentReturnType = () => JSX.Element;

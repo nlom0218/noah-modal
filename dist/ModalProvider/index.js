@@ -40,9 +40,9 @@ function ModalProvider(_a) {
         throw Error("".concat(name, "\uC5D0 \uD574\uB2F9\uD558\uB294 \uBAA8\uB2EC\uC774 \uC5C6\uC2B5\uB2C8\uB2E4."));
     };
     var makeModalComponent = function (modal, name, animation) {
-        var title = modal.title, isAbleBackdropClick = modal.isAbleBackdropClick, delayMsTime = modal.delayMsTime, component = modal.component;
+        var title = modal.title, isAbleBackdropClick = modal.isAbleBackdropClick, delayMsTime = modal.delayMsTime, component = modal.component, _a = modal.position, position = _a === void 0 ? 'bottom' : _a;
         return function () {
-            return function () { return (_jsx(Modal, { title: title, name: name, isAbleBackdropClick: isAbleBackdropClick || true, delayMsTime: delayMsTime || 0, animation: animation, closeModal: closeModal, children: component })); };
+            return function () { return (_jsx(Modal, { title: title, name: name, isAbleBackdropClick: isAbleBackdropClick || true, delayMsTime: delayMsTime || 0, animation: animation, closeModal: closeModal, children: component, position: position })); };
         };
     };
     var initValue = {

@@ -8,6 +8,7 @@ export type ModalProps = {
   isAbleBackdropClick: boolean;
   children: ReactNode;
   animation: AnimationTypes;
+  position: 'bottom' | 'middle';
   closeModal: (name: string) => void;
 };
 

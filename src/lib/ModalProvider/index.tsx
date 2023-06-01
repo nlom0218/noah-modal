@@ -46,7 +46,13 @@ function ModalProvider({
     name: string,
     animation: AnimationTypes
   ) => {
-    const { title, isAbleBackdropClick, delayMsTime, component } = modal;
+    const {
+      title,
+      isAbleBackdropClick,
+      delayMsTime,
+      component,
+      position = 'bottom',
+    } = modal;
 
     return () => {
       return () => (
@@ -58,6 +64,7 @@ function ModalProvider({
           animation={animation}
           closeModal={closeModal}
           children={component}
+          position={position}
         />
       );
     };

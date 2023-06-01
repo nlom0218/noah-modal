@@ -9,6 +9,7 @@ function Modal({
   children,
   animation,
   closeModal,
+  position = 'bottom',
 }: ModalProps) {
   const handleCloseModal = () => closeModal(name);
 
@@ -23,7 +24,11 @@ function Modal({
         onClick={handleClickBackdrop}
         isAbleBackdropClick={isAbleBackdropClick}
       />
-      <S.ModalContents animation={animation} delayMsTime={delayMsTime}>
+      <S.ModalContents
+        position={position}
+        animation={animation}
+        delayMsTime={delayMsTime}
+      >
         <S.TopSheet>
           <S.Title>{title}</S.Title>
           <S.CloseButton onClick={handleCloseModal}>X</S.CloseButton>

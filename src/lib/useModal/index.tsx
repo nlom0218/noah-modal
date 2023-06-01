@@ -13,6 +13,7 @@ const useModal = () => {
     openModal: _openModal,
     closeModal: _closeModal,
     Modal: currentModal,
+    isModalOpen: Boolean(currentModal),
   };
 };
 

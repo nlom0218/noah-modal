@@ -8,6 +8,7 @@ var useModal = function () {
         openModal: _openModal,
         closeModal: _closeModal,
         Modal: currentModal,
+        isModalOpen: Boolean(currentModal),
     };
 };
 export default useModal;
